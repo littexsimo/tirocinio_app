@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="AppClustering:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/AppClustering_jar</output-path>
+    <root id="archive" name="AppClustering.jar">
+      <element id="module-output" name="AppClustering" />
+    </root>
+  </artifact>
+</component>

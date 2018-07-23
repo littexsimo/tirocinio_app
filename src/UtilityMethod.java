@@ -192,12 +192,12 @@ public class UtilityMethod {
 
         while(i<costchar.length){
 
-            if(costchar[i]=='\n'){
+            if(costchar[i]=='\n' || i == costchar.length-1){
 
-                j++;
+
                 costraintList.add(j,UtilityMethod.splitFiler(costraintnumber,costraintnumber.length()));
                 costraintnumber="";
-                i++;
+                j++;
 
 
             }
@@ -408,6 +408,12 @@ public class UtilityMethod {
 
         String [] splitted = new String[5];
 
+        for(int i = 0; i<5; i++){
+
+            splitted[i] = "";
+
+        }
+
         String aminoacid = "";
         int position = 0;
         String atom = "";
@@ -420,7 +426,7 @@ public class UtilityMethod {
         char [] charstring = s.toCharArray();
 
 
-        while(i<l){
+        while(i<=l){
 
             if(charstring[i] == ' '){
 
@@ -429,6 +435,7 @@ public class UtilityMethod {
             }
 
             splitted[j] = splitted[j] + charstring[i];
+            i++;
 
         }
 
