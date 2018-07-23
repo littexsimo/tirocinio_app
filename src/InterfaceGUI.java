@@ -388,15 +388,15 @@ public class InterfaceGUI extends JFrame{
 
                 for( int z = 0; z<number_ca; z++){
 
-                    distanceComplex[i][j] = distanceComplex[i][j] +
+                    distanceComplex[i][j] = (distanceComplex[i][j] +
 
-                            Math.sqrt(Math.pow( ca_secondComplex.get(z)[0]-ca_firstComplex.get(z)[0] ,2 ) +
+                                    Math.pow( ca_secondComplex.get(z)[0]-ca_firstComplex.get(z)[0] ,2 ) +
                                     Math.pow( ca_secondComplex.get(z)[1]-ca_firstComplex.get(z)[1] ,2 ) +
                                     Math.pow( ca_secondComplex.get(z)[2]-ca_firstComplex.get(z)[2] ,2 ));
 
                 }
 
-                distanceComplex[i][j] = Math.sqrt(Math.pow(distanceComplex[i][j],2) / number_ca );
+                distanceComplex[i][j] = Math.sqrt(distanceComplex[i][j] / number_ca );
 
             }
 
@@ -664,6 +664,24 @@ public class InterfaceGUI extends JFrame{
         for(int i = 0; i<5; i++){
 
             outputTextArea.append("il complesso "+selectedComplex.get(top_5[i]).getComplexname()+" ha "+clusdensity[top_5[i]]+" elementi simili a lui\n");
+
+        }
+
+
+        outputTextArea.append("\n");
+
+        for(int i = 0; i<5; i++){
+
+            outputTextArea.append("\n\nComplessi nel cluster avente medioide il complesso "+ selectedComplex.get(top_5[i]).getComplexname()+":\n");
+            for(int j = 0; j<selectedComplex.size(); j++){
+
+                if(cluster[j] == cluster[top_5[i]]){
+
+                    outputTextArea.append("-Complesso"+selectedComplex.get(j).getComplexname()+"\n");
+
+                }
+
+            }
 
         }
 

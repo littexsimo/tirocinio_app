@@ -192,24 +192,26 @@ public class UtilityMethod {
 
         while(i<costchar.length){
 
-            if(costchar[i]=='\n' || i == costchar.length-1){
+            if(costchar[i]=='\n'){
 
 
                 costraintList.add(j,UtilityMethod.splitFiler(costraintnumber,costraintnumber.length()));
                 costraintnumber="";
                 j++;
+                i++;
 
 
             }
             else{
 
                 costraintnumber = costraintnumber+costchar[i];
-                System.out.println(costraintnumber);
                 i++;
 
             }
 
         }
+
+        if (i == costchar.length){costraintList.add(j,UtilityMethod.splitFiler(costraintnumber,costraintnumber.length()));}
 
 
         for(int k = 0; k<costraintList.size(); k++){
@@ -219,11 +221,18 @@ public class UtilityMethod {
         }
 
 
-        List<Double []> costraintcoordinate1 = new ArrayList<>();
-        List<Double []> costraintcoordinate2 = new ArrayList<>();
 
+
+        boolean tcol = true;
+
+        int complesso = 0;
 
         for(Complex co : complexList){
+
+            List<Double []> costraintcoordinate1 = new ArrayList<>();
+            List<Double []> costraintcoordinate2 = new ArrayList<>();
+
+            complesso++;
 
             Scanner sc = null;
             try {
@@ -247,7 +256,15 @@ public class UtilityMethod {
 
             int costraintcounter = 0;
 
-            while(sc.hasNext()){
+            boolean finish = false;
+
+            int carbon = 0;
+
+            boolean cat2 = true;
+
+
+
+            while(sc.hasNext() && !finish){
 
                 boolean req = true;
                 sc.next();sc.next();
@@ -256,6 +273,7 @@ public class UtilityMethod {
 
                 if(costraintcounter<costraintList.size()) {
 
+                    //System.out.println("carbo = "+carbon+" costraintcounter = "+costraintcounter +" 1cat");
                     if (carbonType.equals(costraintList.get(costraintcounter).atom)) {
 
                         String aa = sc.next();
@@ -289,6 +307,8 @@ public class UtilityMethod {
                         sc.next();
                         sc.next();
 
+                        carbon++;
+
 
                     } else {
 
@@ -302,12 +322,17 @@ public class UtilityMethod {
                         sc.next();
                         sc.next();
 
+                        carbon++;
+
                         if (column13) sc.next();
 
                     }
 
                 }else{
 
+                    if(cat2){ carbon = 0; cat2=false;}
+                    carbon++;
+                    //System.out.println("carbo = "+carbon+"costlist.size ="+costraintList.size()+" costraintcounter = "+costraintcounter+" 2cat");
                     if (carbonType.equals(costraintList.get(costraintcounter-costraintList.size()).atom)) {
 
                         String aa = sc.next();
@@ -334,6 +359,7 @@ public class UtilityMethod {
                         if (req) {
                             costraintcoordinate2.add(coordinate);
                             costraintcounter++;
+                            if (costraintcounter == (costraintList.size()*2)) finish = true;
                         }
 
                         sc.next();
@@ -358,19 +384,12 @@ public class UtilityMethod {
 
                     }
 
-
-
-
                 }
-
-
 
             }
 
 
             boolean isincostraint = true;
-
-
 
             for(int k = 0; k<costraintList.size(); k++) {
 
@@ -379,7 +398,7 @@ public class UtilityMethod {
                         Math.pow( costraintcoordinate1.get(k)[1]-costraintcoordinate2.get(k)[1] ,2 ) +
                         Math.pow( costraintcoordinate1.get(k)[2]-costraintcoordinate2.get(k)[2] ,2 ));
 
-                if(dist < (costraintList.get(k).distance-costraintList.get(k).limit) && dist > (costraintList.get(k).distance+costraintList.get(k).limit)){
+                if(dist < (costraintList.get(k).distance-costraintList.get(k).limit) || dist > (costraintList.get(k).distance+costraintList.get(k).limit)){
 
                     isincostraint = false;
 
@@ -426,16 +445,19 @@ public class UtilityMethod {
         char [] charstring = s.toCharArray();
 
 
-        while(i<=l){
+        while(i<l){
 
             if(charstring[i] == ' '){
 
                 j++;
+                i++;
+
+            }else {
+
+                splitted[j] = splitted[j] + charstring[i];
+                i++;
 
             }
-
-            splitted[j] = splitted[j] + charstring[i];
-            i++;
 
         }
 
