@@ -52,7 +52,7 @@ public class InterfaceGUI extends JFrame{
 
         this.setContentPane(mainPanel);
 
-        Dimension preferredDimension = new Dimension(1000, 800);
+        Dimension preferredDimension = new Dimension(1100, 825);
         mainPanel.setPreferredSize(preferredDimension);
 
         splitPane.setOrientation(0);
@@ -126,7 +126,14 @@ public class InterfaceGUI extends JFrame{
 
                 fileList.clear();
 
-                pathFile = UtilityMethod.mYFileChooser(path);
+                if(pathFile == null) {
+                    pathFile = UtilityMethod.mYFileChooser(path);
+                }else{
+
+                    pathFile = UtilityMethod.mYFileChooser(pathFile);
+
+                }
+
                 if(pathFile != null){
 
                     importComplex();
@@ -151,6 +158,10 @@ public class InterfaceGUI extends JFrame{
                     if (end >= 0) {
                         complexList.setSelectionInterval(start, end);
                     }
+
+                }else{
+
+                    complexList.clearSelection();
 
                 }
 
@@ -661,28 +672,54 @@ public class InterfaceGUI extends JFrame{
         }
         outputTextArea.append("\n\nTOP 5 DENSITY CLUSTERS\n\n");
 
-        for(int i = 0; i<5; i++){
+        if(selectedComplex.size()>5) {
+            for (int i = 0; i < 5; i++) {
 
-            outputTextArea.append("il complesso "+selectedComplex.get(top_5[i]).getComplexname()+" ha "+clusdensity[top_5[i]]+" elementi simili a lui\n");
+                outputTextArea.append("il complesso " + selectedComplex.get(top_5[i]).getComplexname() + " ha " + clusdensity[top_5[i]] + " elementi simili a lui\n");
 
+            }
+        }else{
+
+            for (int i = 0; i < selectedComplex.size(); i++) {
+
+                outputTextArea.append("il complesso " + selectedComplex.get(top_5[i]).getComplexname() + " ha " + clusdensity[top_5[i]] + " elementi simili a lui\n");
+
+            }
         }
-
 
         outputTextArea.append("\n");
 
-        for(int i = 0; i<5; i++){
+        if(selectedComplex.size()>5) {
+            for (int i = 0; i < 5; i++) {
 
-            outputTextArea.append("\n\nComplessi nel cluster avente medioide il complesso "+ selectedComplex.get(top_5[i]).getComplexname()+":\n");
-            for(int j = 0; j<selectedComplex.size(); j++){
+                outputTextArea.append("\n\nComplessi nel cluster avente medioide il complesso " + selectedComplex.get(top_5[i]).getComplexname() + ":\n");
+                for (int j = 0; j < selectedComplex.size(); j++) {
 
-                if(cluster[j] == cluster[top_5[i]]){
+                    if (cluster[j] == cluster[top_5[i]]) {
 
-                    outputTextArea.append("-Complesso"+selectedComplex.get(j).getComplexname()+"\n");
+                        outputTextArea.append("-Complesso" + selectedComplex.get(j).getComplexname() + "\n");
+
+                    }
 
                 }
 
             }
+        }else{
 
+            for (int i = 0; i < selectedComplex.size(); i++) {
+
+                outputTextArea.append("\n\nComplessi nel cluster avente medioide il complesso " + selectedComplex.get(top_5[i]).getComplexname() + ":\n");
+                for (int j = 0; j < selectedComplex.size(); j++) {
+
+                    if (cluster[j] == cluster[top_5[i]]) {
+
+                        outputTextArea.append("-Complesso" + selectedComplex.get(j).getComplexname() + "\n");
+
+                    }
+
+                }
+
+            }
         }
 
     }

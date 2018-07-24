@@ -10,7 +10,7 @@ public class MainClass {
 
     public static void main( final String[] args ){
 
-        new InterfaceGUI("/home/simone/simo/uni/tirocinio/mio/complessi");
+        new InterfaceGUI(".");
 
     }
 

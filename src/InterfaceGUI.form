@@ -219,7 +219,7 @@
           <component id="609d3" class="javax.swing.JTextArea" binding="costraintTextArea">
             <constraints/>
             <properties>
-              <text value="GLY 2 CA 20 5"/>
+              <text value="GLY 2 CA 20 5 (esempio)(posizioni ordinate) "/>
             </properties>
           </component>
         </children>
